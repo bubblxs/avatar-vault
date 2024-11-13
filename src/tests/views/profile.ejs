@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= steamId %>'s profile
+    </title>
+</head>
+<style>
+    * {
+        font-family: sans-serif;
+        box-sizing: border-box;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+        color: #a8d2d2;
+    }
+
+    .profile-wrapper {
+        background-color: #000;
+        margin-inline: auto;
+        padding: 30px;
+        width: 60%;
+    }
+
+    .avatar {
+        height: 184px;
+        width: 184px;
+        margin-right: 30px
+    }
+</style>
+
+<body style="background-color: #243636">
+    <div class="profile-wrapper">
+        <div style="display: flex">
+            <div class="playerAvatarAutoSizeInner">
+                <div class="profile_avatar_frame"></div>
+                <img src="/assets/profile_full.jpg">
+            </div>
+            <div style="margin-inline: 25px">
+                <p style="font-size: 24px; margin-bottom: 10px" class="personaName"></p>
+                <p style="font-size: 13px">
+                    req id <%= steamId %>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const g_rgProfileData = { "url": "https:\/\/steamcommunity.com\/id\/GabeLoganNewell\/", "steamid": "76560000000000000", "personaname": "GabeLoganNewell" };
+        const personaName = document.querySelector(".personaName");
+
+        personaName.textContent = g_rgProfileData.personaname;
+        document.title = g_rgProfileData.steamid;
+    </script>
+
+</body>
+
+</html>

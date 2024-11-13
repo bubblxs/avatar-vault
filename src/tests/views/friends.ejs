@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= steamId %>'s friends</title>
+</head>
+<style>
+    * {
+        font-family: sans-serif;
+        box-sizing: border-box;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+        color: #a8d2d2;
+    }
+
+    body {
+        background-color: #243636;
+        height: 100vh;
+        width: 100%;
+    }
+
+    h2 {
+        width: 100%;
+        background-color: #000;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .friend_block {
+        margin-inline: auto;
+    }
+
+    .friend-wrapper {
+        background-color: #000;
+        margin-inline: auto;
+        width: 60%;
+    }
+
+    .friend {
+        display: flex;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        background-color: #000;
+        border-bottom: 1px solid #a8d2d2;
+    }
+
+    .selectable {
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <h2><%= steamId %>'s friends</h2>
+    <% if (friends.length > 0) { %>
+        <div class="friend-wrapper">
+            <% friends.forEach((frenSteamId) => { %>
+                <div class="friend"> 
+                    <!-- img(src="http://localhost:4242/static/profile_full.jpg", style="height: 60px; width: 60px") -->
+                    <a  class="selectable" 
+                        href="http://localhost:4242/profiles/<%= frenSteamId %>"
+                        data-steamid="<%= frenSteamId %>">
+                        <%= frenSteamId %>
+                    </a>
+                </div> 
+            <% }); %>
+        </div>
+    <% } else { %>
+        <p>no friendos :(</p>
+    <% }%>
+</body>
+</html>
