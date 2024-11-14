@@ -5,7 +5,7 @@ import { scheduleJob } from "node-schedule";
 import { mkdirSync, existsSync } from "node:fs";
 
 import { DATABASE_CONFIG, TUMBLR_CONFIG } from "../config.mjs";
-import { Tumblr, Scraper, Database, Utils } from "./Classes/index.mjs";
+import { Tumblr, Scraper, Database, Utils } from "./classes/index.mjs";
 
 const IMG_DIR = resolve(import.meta.dirname, "imgs");
 const MIN_ITEMS_QUEUE = 10;
@@ -72,7 +72,7 @@ const run = async () => {
                 } catch (error) { }
             }
 
-            Utils.log(`${count} items added to queue on database.`, "Warning");
+            Utils.log(`${count} steamids were added to queue on database.`, "Success");
         }
 
     } catch (error) {
@@ -84,12 +84,13 @@ const run = async () => {
         if (idx !== -1) queue.splice(idx, 1);
 
         if (queue.length < MIN_ITEMS_QUEUE) {
+            Utils.log("min amount of steamids on queue reached. fetching more from database...", "Warning");
             (await database.query("SELECT ITEM FROM QUEUE LIMIT $1;", [MAX_ITEMS_QUEUE - queue.length])).forEach((row) => {
                 queue.push(row.item);
             });
         }
 
-        Utils.log(`${queue.length} items on queue.`);
+        Utils.log(`${queue.length} steamids on queue.`);
     }
 };
 
@@ -135,7 +136,7 @@ const init = async () => {
         Utils.log("this application is scheduled to run every 30 minutes.", "Warning");
     }
 
-    Utils.log(`${queue.length} items on queue.`);
+    Utils.log(`${queue.length} steamids on queue.`);
 };
 
 (async () => {

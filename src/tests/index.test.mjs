@@ -1,7 +1,7 @@
 import { it } from "node:test";
 import assert from "node:assert";
 
-import { Scraper } from "../Classes/index.mjs";
+import { Scraper } from "../classes/index.mjs";
 
 const LOCAL_HOST = new URL("http://localhost:4242");
 
