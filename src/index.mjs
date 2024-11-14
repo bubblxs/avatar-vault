@@ -84,9 +84,9 @@ const run = async () => {
         if (idx !== -1) queue.splice(idx, 1);
 
         if (queue.length < MIN_ITEMS_QUEUE) {
-            const items = await database.query("SELECT item FROM Queue LIMIT $1;", [MAX_ITEMS_QUEUE - queue.length]);
-
-            queue.push(...items);
+            (await database.query("SELECT ITEM FROM QUEUE LIMIT $1;", [MAX_ITEMS_QUEUE - queue.length])).forEach((row) => {
+                queue.push(row.item);
+            });
         }
 
         Utils.log(`${queue.length} items on queue.`);
